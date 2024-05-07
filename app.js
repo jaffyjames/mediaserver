@@ -19,11 +19,7 @@ const config = {
     allow_origin: '*',
     webroot: './public' // Specify the path to your HTML file
   },
-  trans: {
-    // Configure the transcoding options as needed
-    // For passing the stream without saving files, you might not need transcoding
-    ffmpeg: '/path/to/ffmpeg' // Specify the path to ffmpeg if transcoding is required
-  }
+
 };
 
 const nms = new NodeMediaServer(config);
