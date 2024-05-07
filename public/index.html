@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RTMP Stream Player</title>
+    <!-- Include flv.js -->
+    <script src="https://cdn.jsdelivr.net/npm/flv.js@1.6.0/dist/flv.min.js"></script>
+    <style>
+        /* Style for the container div */
+        .video-container {
+            width: 640px; /* Set width of the video player */
+            border: 2px solid #ccc; /* Add border around the video */
+            overflow: hidden; /* Hide overflowing parts of the video */
+        }
+
+        /* Style for the video element */
+        video {
+            width: 100%; /* Make the video fill the container */
+        }
+    </style>
+</head>
+<body>
+    <!-- Define a video element with an ID -->
+    <div class="video-container">
+        <video id="my-video" width="640" height="360" autoplay muted></video>
+    </div>
+
+    <script>
+        // Instantiate flv.js player
+        if (flvjs.isSupported()) {
+            var videoElement = document.getElementById('my-video');
+            var flvPlayer = flvjs.createPlayer({
+                type: 'flv',
+				
+				
+		        url: 'http://88.97.216.5:8000/livestream/stream_key1.flv' // Replace with your RTMP URL
+               // url: 'http://88.97.216.5:8000/livestream/stream_key1.flv' // Replace with your RTMP URL
+			  // url: 'http://192.168.4.22:8000/livestream/stream_key1.flv' // Replace with your RTMP URL
+			  
+			  
+				//url: 'http://192.168.1.10:8000/livestream/stream_key1.flv' // Replace with your RTMP URL
+			// url: 'http://92.14.175.166:8000/livestream/stream_key1.flv' // Replace with your RTMP URL	
+            });
+            flvPlayer.attachMediaElement(videoElement);
+            flvPlayer.load();
+            flvPlayer.on(flvjs.Events.ERROR, function(errorType, errorDetail) {
+                console.error('FLV.js error:', errorType, errorDetail);
+            });
+            flvPlayer.on(flvjs.Events.LOADED_METADATA, function () {
+                videoElement.play(); // Autoplay when metadata is loaded
+            });
+        } else {
+            console.error('FLV.js not supported');
+        }
+    </script>
+</body>
+</html>
